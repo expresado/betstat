@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  match: MyString
+  course: 1.5
+  bet: 1.5
+  result: false
+
+two:
+  match: MyString
+  course: 1.5
+  bet: 1.5
+  result: false

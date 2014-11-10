@@ -1,0 +1,59 @@
+<h1>Listing bets</h1>
+<TABLE BORDER="5"    WIDTH="50%"   CELLPADDING="4" CELLSPACING="3">
+   <TR>
+      <TH COLSPAN="5"><BR><H3>Stavky</H3>
+      </TH>
+   </TR>
+   <TR>
+      <th>Match</th>
+      <th>Course</th>
+      <th>Bet</th>
+      <th>Result</th>
+      <th>Gain</th>
+   </TR>
+  <tbody>
+  <%  unless @bets.empty? %>  
+    <%@bets.each do |bet| %>
+   <TR ALIGN="CENTER">
+        <td><%= bet.match  %></td>
+        <td><%= bet.course %></td>
+        <td><%= bet.bet%>€</td>
+        <td><%= bet.result %></td>
+        <td><% if bet.result %>
+        <%=((bet.bet * bet.course) - bet.bet).round(3)%>€
+        <% else %>
+        <%= -(bet.bet) %>€
+        <%end%>
+        <td><%= link_to 'Show', bet %></td>
+        <td><%= link_to 'Edit', edit_bet_path(bet) %></td>
+        <td><%= link_to 'Destroy', bet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to "True/False", truefalse_bet_path(bet), method: :put %></td>
+
+    </TR>
+    <%end%>
+  <%end%>
+    <TR ALIGN="CENTER">
+    <td><%=  %></td>
+    <td><%=  %></td>
+    <td><%= %></td>
+    <td><%=  %></td>
+    <% i=0 %>
+    <td><% @bets.each do |bet| %>
+     <% unless bet.course.nil? || bet.bet.nil? %>
+        <% if bet.result%>
+        <% i= i+((bet.bet * bet.course) - bet.bet)%>
+        <% else i= i- bet.bet %>
+        <%end%>
+      <%end%>
+    <%end%>
+    <%=i.round(3)%>€
+    </td>
+  <td><%= (i/5).round(3)%>j</td>
+    </TR>
+  </tbody>
+</table>
+1 jednotka = 5€
+
+<br>
+
+<%= link_to 'New Bet', new_bet_path %>

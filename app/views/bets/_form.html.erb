@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Bet Stats</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../css/sb-admin.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="../css/plugins/morris.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="../font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+
+    
+ <div id="page-wrapper">
+
+    <div class="container-fluid">
+     <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Add Match
+                        </h1>
+                            </div>
+                </div>
+<div class="row">
+                    <div class="col-lg-6">
+
+<%= form_for(@bet) do |f| %>
+  <% if @bet.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@bet.errors.count, "error") %> prohibited this bet from being saved:</h2>
+
+      <ul>
+      <% @bet.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.text_field :match, autocomplete: "off", :class => "form-control", :placeholder => "Match" %>
+  </div>
+  <div class="field">
+    <%= f.text_field :course, autocomplete: "off", :class => "form-control", :placeholder => "Course" %>
+  </div>
+  <div class="field">
+    <%= f.text_field :bet, autocomplete: "off", :class => "form-control", :placeholder => "Bet" %>
+  </div>
+  <div class="field">
+    <%= f.label :result %><br>
+    <div>
+      <%= f.radio_button :result, false , :checked => true , :value => false %>
+      <%= label :result, "Lost" %></div>
+
+  <div>
+       <%= f.radio_button :result, true, :value => true%>
+       <%= label :result, "Won"%></div>
+
+  </div>
+   <div>
+      <%= f.radio_button :result, nil , :value => nil %>
+      <%= label :result, "Waiting" %></div>
+  <div class="actions">
+    <%= f.submit "Create" ,class: "btn btn-lg btn-primary" %>
+  </div>
+<% end %>
+</div>
+</div></div>
+</div>
+</body>
+</html>
