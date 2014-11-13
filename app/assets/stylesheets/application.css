@@ -14,8 +14,9 @@
  *= require_self
  */
 .spodok {
-	 	width:90%;
 	position:absolute;
-	bottom:0;
-	left:5%;
+   bottom:0;
+   width:90%;
+   left:5%;
+   height:60px;   /* Height of the footer */
 }
