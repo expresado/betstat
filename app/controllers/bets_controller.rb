@@ -32,6 +32,7 @@ require 'pry'
   def create
     @bet = Bet.new(bet_params)
     @bet.user_id = current_user.id
+    @bet.before_save
     if @bet.result =="true"
       @bet.gain= ((@bet.bet * @bet.course ) - @bet.bet).round(3)
     elsif @bet.result =="false"
@@ -77,7 +78,7 @@ require 'pry'
   def destroy
     @bet.destroy
     respond_to do |format|
-      format.html { redirect_to bets_url, notice: 'Bet was successfully destroyed.' }
+      format.html { redirect_to :back, notice: 'Bet was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -102,6 +103,6 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bet_params
-      params.require(:bet).permit(:match, :course, :bet, :result, :gain)
+      params.require(:bet).permit(:match, :course, :bet, :result, :gain, :team1, :team2)
     end
 end

@@ -61,8 +61,16 @@
   <% end %>
 
   <div class="field">
-    <%= f.text_field :match, autocomplete: "off", :class => "form-control", :placeholder => "Match" %>
+    <div class="row">
+      <div class="col-sm-6">
+      <%= f.text_field :team1, autocomplete: "off", :class => "form-control", :placeholder => "Team/player" %>
+      </div>
+      <div class="col-sm-6">
+      <%= f.text_field :team2, autocomplete: "off", :class => "form-control", :placeholder => "Opponent" %>
+      </div>
+    </div>
   </div>
+
   <div class="field">
     <%= f.text_field :course, autocomplete: "off", :class => "form-control", :placeholder => "Course" %>
   </div>
