@@ -27,15 +27,6 @@ ActiveRecord::Schema.define(version: 20141109183406) do
     t.float    "gain"
   end
 
-  create_table "movies", force: true do |t|
-    t.string   "name"
-    t.string   "original_name"
-    t.text     "description"
-    t.string   "director"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false

@@ -11,7 +11,11 @@ default: &default
 
 development:
   <<: *default
-  database: db/develop
+  host: localhost
+  encoding: unicode
+  database: develop
+  username: expresado
+  password: K8pk0v1c0v1
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
