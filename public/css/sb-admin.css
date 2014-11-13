@@ -16,12 +16,20 @@ body {
         margin-top: 50px;
     }
 }
-#spodok {
+.spodok {
     position:absolute;
    bottom:0;
    top:auto;
    width:90%;
    left:5%;
+}
+@media(min-width:768px ){
+.spodok {
+    position:absolute;
+   bottom:0;
+   width:90%;
+   left:5%;
+}
 }
 #wrapper {
     padding-left: 0;
