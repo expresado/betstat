@@ -13,10 +13,3 @@
  *= require_tree .
  *= require_self
  */
-#spodok {
-	position:absolute;
-   bottom:0;
-   top:auto;
-   width:90%;
-   left:5%;
-}

@@ -16,7 +16,13 @@ body {
         margin-top: 50px;
     }
 }
-
+#spodok {
+    position:absolute;
+   bottom:0;
+   top:auto;
+   width:90%;
+   left:5%;
+}
 #wrapper {
     padding-left: 0;
 }
