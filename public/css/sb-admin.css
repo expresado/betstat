@@ -16,7 +16,7 @@ body {
         margin-top: 50px;
     }
 }
-.spodok {
+#spodok {
     position:absolute;
    bottom:0;
    top:auto;
