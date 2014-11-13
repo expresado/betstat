@@ -37,33 +37,35 @@
 
     <div class="container-fluid">
 
-<div class="row">
-                    <div class="col-xs-2">
+        <div class="row">
+                <div class="col-md-4">
 
-<% if user_signed_in? %>
-	You are signed in as <%= current_user.email%>
-	<%= button_to "Sign out", destroy_user_session_path,:class =>"btn btn-lg btn-primary", :method=> :delete %>
-<% else %>
-	<%= button_to "Sign up!", new_user_registration_path,:class =>"btn btn-lg btn-primary", :method=> :get %> 
-</div>
+                    <% if user_signed_in? %>
+                    	You are signed in as <%= current_user.email%>
+                    	<%= button_to "Sign out", destroy_user_session_path,:class =>"btn btn-lg btn-primary", :method=> :delete %>
+                    <% else %>
+                    	<%= button_to "Sign up!", new_user_registration_path,:class =>"btn btn-lg btn-primary", :method=> :get %> 
+                    </div>
 
-                    <div class="col-xs-2">
-    <%= button_to "Sign in", new_user_session_path ,:class =>"btn btn-lg btn-primary" %>
+                    <div class="col-md-4">
+                    <%= button_to "Sign in", new_user_session_path ,:class =>"btn btn-lg btn-primary" %>
+                </div><!--<div class="col-md-4"> -->
+                    <% end %>
+
+                <% flash.each do |name,message| %>
+                	<%= content_tag :div, message, :id => "flash_#{name}" %>
+                <% end %>
+                <%= yield %>
+                </div>
+        </div>
+
+    
     </div>
-<% end %>
-
-<% flash.each do |name,message| %>
-	<%= content_tag :div, message, :id => "flash_#{name}" %>
-<% end %>
-<%= yield %>
 </div>
-</div>
-</div>
-</div>
-<div class ="spodok">
-<div class ="alert alert-info">
-Why I won't use Facebook, Gmail, Twitter, etc. accounts to login on this page? They want to trace you and know everything about you, I am not familiar with this. I do not require any personal data of yours, only your email so I will be able to resend you your password. If you think I need your email, answer is NO. I didn't blocked fake mail generators, so you may use them, if you want. I may even recommend you great one - <url>http://www.fakemailgenerator.com</url>
-</div>
-</div>
+    <div class ="spodok">
+        <div class ="alert alert-info">
+        Why I won't use Facebook, Gmail, Twitter, etc. accounts to login on this page? They want to trace you and know everything about you, I am not familiar with this. I do not require any personal data of yours, only your email so I will be able to resend you your password. If you think I need your email, answer is NO. I didn't blocked fake mail generators, so you may use them, if you want. I may even recommend you great one - <url>http://www.fakemailgenerator.com</url>
+        </div>
+        </div>
 </body>
 </html>
