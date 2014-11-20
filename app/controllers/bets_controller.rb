@@ -5,9 +5,11 @@ require 'pry'
   # GET /bets.json
   def index
     @bets = Bet.where(user_id: current_user.id)
+
   end
   def list
    @bets = Bet.where(user_id: current_user.id)
+
   end
   def stats
    @bets = Bet.where(user_id: current_user.id)
@@ -33,20 +35,22 @@ require 'pry'
     @bet = Bet.new(bet_params)
     @bet.user_id = current_user.id
     @bet.before_save
-    if @bet.result =="true"
+    if @bet.result ==1
       @bet.gain= ((@bet.bet * @bet.course ) - @bet.bet).round(3)
-    elsif @bet.result =="false"
+    elsif @bet.result ==0
       @bet.gain= -@bet.bet.round(3)
     end
     respond_to do |format|
       if @bet.save
          
-        if @bet.result == false
+        if @bet.result == 0
           vypocet = -@bet.bet.round(3)
-          @bet.update_attributes(result: false, gain:vypocet)
-        elsif @bet.result == true
+          @bet.update_attributes(result: 0, gain:vypocet)
+        elsif @bet.result == 1
           vypocet = ((@bet.bet * @bet.course ) - @bet.bet).round(3)
-          @bet.update_attributes(result: true, gain: vypocet)
+          @bet.update_attributes(result: 1, gain: vypocet)
+        elsif @bet.result==2
+          @bet.update_attributes(result: 2, gain: 0)
         end
 
         format.html { redirect_to list_url, notice: 'Bet was successfully created.' }
@@ -77,7 +81,7 @@ require 'pry'
   # DELETE /bets/1.json
   def destroy
     @bet.destroy
-    respond_to do |format|
+    respond_to do |format|-0
       format.html { redirect_to :back, notice: 'Bet was successfully destroyed.' }
       format.json { head :no_content }
     end
@@ -85,12 +89,15 @@ require 'pry'
 
 def truefalse
     @bet = Bet.find(params[:id])
-    if @bet.result == true
+    if @bet.result == 1
     vypocet = -@bet.bet.round(3)
-    @bet.update_attributes(result: false, gain:vypocet)
-  elsif @bet.result == false
+    @bet.update_attributes(result: 0, gain:vypocet)
+  elsif @bet.result == 0
     vypocet = ((@bet.bet * @bet.course ) - @bet.bet).round(3)
-    @bet.update_attributes(result: true, gain: vypocet)
+    @bet.update_attributes(result: 1, gain: vypocet)
+  else 
+    vypocet = ((@bet.bet * @bet.course ) - @bet.bet).round(3)
+    @bet.update_attributes(result: 1, gain: vypocet)
   end
   binding.pry
   redirect_to list_url

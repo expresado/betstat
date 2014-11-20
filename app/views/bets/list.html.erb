@@ -141,7 +141,7 @@
                                 <tbody>
                                   <%  unless @bets.empty? %>  
                                     <%@bets.order('bets.created_at ASC').each do |bet| %>
-                                    <%if bet.result==true %>
+                                    <%if bet.result== 1 %>
                                         <tr class="success">
                                          <td><%= bet.match %></td>
                                             <td><%= bet.course %></td>
@@ -151,7 +151,7 @@
                                             <td><%= button_to 'Destroy', bet,:class => "btn btn-sm btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
                                             <td><%= button_to "Won/Lost", truefalse_bet_path(bet),:class => "btn btn-sm btn-primary", method: :put %></td>
                                              </tr>
-                                    <%elsif bet.result==false%>
+                                    <%elsif bet.result==0%>
                                         <tr class="danger">
                                          <td><%= bet.match  %></td>
                                             <td><%= bet.course %></td>
@@ -214,7 +214,7 @@
                                 <tbody>
                                   <%  unless @bets.empty? %>  
                                     <%@bets.last30.order('bets.created_at ASC').each do |bet| %>
-                                    <%if bet.result==true %>
+                                    <%if bet.result==1 %>
                                         <tr class="success">
                                          <td><%= bet.match  %></td>
                                             <td><%= bet.course %></td>
@@ -224,7 +224,7 @@
                                           <td><%= button_to 'Destroy', bet,:class => "btn btn-sm btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
                                           <td><%= button_to "Won/Lost", truefalse_bet_path(bet),:class => "btn btn-sm btn-primary", method: :put %></td>
                                              </tr>
-                                    <%elsif bet.result==false %>
+                                    <%elsif bet.result==0 %>
                                         <tr class="danger">
                                          <td><%= bet.match  %></td>
                                             <td><%= bet.course %></td>
@@ -288,7 +288,7 @@
                                 <tbody>
                                   <%  unless @bets.empty? %>  
                                     <%@bets.last7.order('bets.created_at ASC').each do |bet| %>
-                                    <%if bet.result==true %>
+                                    <%if bet.result==1 %>
                                         <tr class="success">
                                          <td><%= bet.match  %></td>
                                             <td><%= bet.course %></td>
@@ -298,7 +298,7 @@
                                             <td><%= button_to 'Destroy', bet,:class => "btn btn-sm btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
                                             <td><%= button_to "Won/Lost", truefalse_bet_path(bet),:class => "btn btn-sm btn-primary", method: :put %></td>
                                              </tr>
-                                    <%elsif bet.result==false%>
+                                    <%elsif bet.result==0%>
                                         <tr class="danger">
                                          <td><%= bet.match  %></td>
                                             <td><%= bet.course %></td>
