@@ -31,7 +31,7 @@ class Bet < ActiveRecord::Base
   end
 private
   def xor_match
-    binding.pry
+    ###binding.pry
     if team1.blank? && team2.blank? && match.blank? 
       errors.add(:base, "Please fill in required data")
     elsif team1.blank? && !team2.blank? && !match.blank?
