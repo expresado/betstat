@@ -1,4 +1,5 @@
 class Bet < ActiveRecord::Base
+  require 'pry'
 	attr_accessor :team1, :team2
   validates :bet,  :presence => true
   validates :course, :presence => true
@@ -14,12 +15,29 @@ class Bet < ActiveRecord::Base
   scope :last7, -> { where(created_at: Time.now - (60*60*24*7)..Time.now) }
 
   def before_save
-  	self.match = self.team1 + " - " + self.team2
+    if team1.blank?
+      if team2.blank?
+      else
+        self.match = self.team2
+      end
+    else
+      if team2.blank?
+        self.match = self.team1
+      else
+        self.match = self.team1 + " - " + self.team2
+      end
+    end
+
   end
 private
   def xor_match
-    if team1.blank? && team2.blank? || match.blank?
-      errors.add(:base, "chyba zapisu")
+    binding.pry
+    if team1.blank? && team2.blank? && match.blank? 
+      errors.add(:base, "Please fill in required data")
+    elsif team1.blank? && !team2.blank? && !match.blank?
+      errors.add(:base, "Please fill in required data")
+    elsif !team1.blank? && team2.blank? && !match.blank?
+      errors.add(:base, "Please fill in required data")
     end
   end
 end

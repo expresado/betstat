@@ -5,6 +5,10 @@ resources :bets do
     member do
        get :truefalse
        put :truefalse
+       get :setWon
+       put :setWon
+       get :setLost
+       put :setLost
        get :list
        get :stats
     end 

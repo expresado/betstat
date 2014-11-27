@@ -169,7 +169,10 @@
                                             <td><%= bet.result %></td>
                                            <td>waiting for result</td>
                                             <td><%= button_to 'Destroy', bet,:class => "btn btn-sm btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
-                                            <td><%= button_to "Won/Lost", truefalse_bet_path(bet),:class => "btn btn-sm btn-primary", method: :put %></td>
+                                            <td>
+                                            <%= button_to "Won", setWon_bet_path(bet),:class => "btn btn-sm btn-primary", method: :put %> 
+                                            <%= button_to "Lost", setLost_bet_path(bet),:class => "btn btn-sm btn-primary", method: :put %>
+                                            </td>
                                              </tr>
                                              <%end%>
                                     <%end%>

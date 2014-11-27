@@ -1,5 +1,5 @@
 class BetsController < ApplicationController
-  before_action :set_bet, only: [:show, :edit, :update, :destroy, :truefalse]
+  before_action :set_bet, only: [:show, :edit, :update, :destroy, :truefalse, :setWon, :setLost]
 require 'pry'
   # GET /bets
   # GET /bets.json
@@ -99,8 +99,21 @@ def truefalse
     vypocet = ((@bet.bet * @bet.course ) - @bet.bet).round(3)
     @bet.update_attributes(result: 1, gain: vypocet)
   end
-  binding.pry
   redirect_to list_url
+end
+
+def setWon
+  @bet = Bet.find(params[:id])
+    vypocet = ((@bet.bet * @bet.course ) - @bet.bet).round(3)
+    @bet.update_attributes(result: 1, gain: vypocet)
+  redirect_to list_url
+end
+
+def setLost
+  @bet = Bet.find(params[:id])
+    vypocet = -@bet.bet.round(3)
+    @bet.update_attributes(result: 0, gain:vypocet)
+    redirect_to list_url
 end
   private
     # Use callbacks to share common setup or constraints between actions.

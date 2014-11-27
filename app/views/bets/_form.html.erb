@@ -79,18 +79,16 @@
   </div>
   <div class="field">
     <%= f.label :result %><br>
-    <div>
-      <%= f.radio_button :result, "0" , :checked => "1" , :value => "0" %>
-      <%= label :result, "Lost" %></div>
-
   <div>
-       <%= f.radio_button :result, "1", :value => "1"%>
-       <%= label :result, "Won"%></div>
-
+       <%= f.radio_button :result, "1", :value => "1", :checked => true%>
+       <%= label :result, "Won"%>
   </div>
+    <div>
+      <%= f.radio_button :result, "0" , :value => "0" %>
+      <%= label :result, "Lost" %></div>
    <div>
       <%= f.radio_button :result, "2" , :value => "2" %>
-      <%= label :result, "Waiting" %></div>
+      <%= label :result, "Waiting for result" %></div>
   <div class="actions">
     <%= f.submit "Create" ,class: "btn btn-lg btn-primary" %>
   </div>
