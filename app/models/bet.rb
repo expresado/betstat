@@ -13,6 +13,8 @@ class Bet < ActiveRecord::Base
   accepts_nested_attributes_for :user
   scope :last30, -> { where(created_at: Time.now - (60*60*24*30)..Time.now) }
   scope :last7, -> { where(created_at: Time.now - (60*60*24*7)..Time.now) }
+  scope :toRemind, -> { where(remind: true)}
+  scope :remindable, -> { where(reminder: Time.now - (60*60*24*30)..Time.now)}
 
   def before_save
     if team1.blank?
@@ -26,6 +28,9 @@ class Bet < ActiveRecord::Base
       else
         self.match = self.team1 + " - " + self.team2
       end
+    end
+    if remind
+      self.reminder = reminder
     end
 
   end

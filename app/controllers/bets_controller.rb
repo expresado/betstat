@@ -42,7 +42,6 @@ require 'pry'
     end
     respond_to do |format|
       if @bet.save
-         
         if @bet.result == 0
           vypocet = -@bet.bet.round(3)
           @bet.update_attributes(result: 0, gain:vypocet)
@@ -105,14 +104,14 @@ end
 def setWon
   @bet = Bet.find(params[:id])
     vypocet = ((@bet.bet * @bet.course ) - @bet.bet).round(3)
-    @bet.update_attributes(result: 1, gain: vypocet)
+    @bet.update_attributes(result: 1, gain: vypocet, remind:nil,reminder:nil)
   redirect_to list_url
 end
 
 def setLost
   @bet = Bet.find(params[:id])
     vypocet = -@bet.bet.round(3)
-    @bet.update_attributes(result: 0, gain:vypocet)
+    @bet.update_attributes(result: 0, gain:vypocet, remind:nil,reminder:nil)
     redirect_to list_url
 end
   private
@@ -123,6 +122,6 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bet_params
-      params.require(:bet).permit(:match, :course, :bet, :result, :gain, :team1, :team2)
+      params.require(:bet).permit(:match, :course, :bet, :result, :gain, :team1, :team2, :remind, :reminder)
     end
 end

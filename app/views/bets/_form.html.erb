@@ -87,8 +87,15 @@
       <%= f.radio_button :result, "0" , :value => "0" %>
       <%= label :result, "Lost" %></div>
    <div>
-      <%= f.radio_button :result, "2" , :value => "2" %>
-      <%= label :result, "Waiting for result" %></div>
+      <%= f.radio_button :result, "2" , :value => "2"%>
+      <%= label :result, "Waiting for result  " %> 
+      <%= f.check_box :remind%>
+      <%=label :remind, "Set Reminder?  " %>
+
+      <div id="datetime" style="display:none;"><%= f.datetime_select :reminder, :class => "result_waiting"%></div>
+
+
+    </div>
   <div class="actions">
     <%= f.submit "Create" ,class: "btn btn-lg btn-primary" %>
   </div>
@@ -96,5 +103,39 @@
 </div>
 </div></div>
 </div>
+
+<script type="text/javascript">
+    // Get your checkbox who determine the condition
+    var determine = document.getElementById("bet_result_2");
+    var remind= document.getElementById("bet_remind");
+    // Make a function who disabled or enabled your conditioned checkbox
+    var disableCheckboxConditioned = function () {
+        if(determine.checked) {
+            document.getElementById("bet_remind").disabled = false;
+        }
+        else {
+            document.getElementById("bet_remind").disabled = true;
+        }
+    }
+    // On click active your function
+    determine.onclick = disableCheckboxConditioned;
+    disableCheckboxConditioned();
+</script>
+<script type="text/javascript">
+    // Get your checkbox who determine the condition
+    var remind= document.getElementById("bet_remind");
+    // Make a function who disabled or enabled your conditioned checkbox
+    var disableDateTime = function () {
+        if(remind.checked) {
+          $('#datetime').show();
+        }
+        else {
+          $('#datetime').hide();
+        }
+    }
+    // On click active your function
+    remind.onclick = disableDateTime;
+    disableDateTime();
+</script>
 </body>
 </html>

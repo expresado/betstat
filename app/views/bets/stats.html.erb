@@ -54,6 +54,27 @@
             <ul class="nav navbar-right top-nav">
               
                 <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"> <%= @bets.toRemind.remindable.size%></i> <b class="caret"></b></a>
+                    <ul class="dropdown-menu alert-dropdown">
+                    <% @bets.toRemind.remindable.each do |bet|%>
+
+                        <li><a href="#"><%=bet.match%> </a>
+                        <div style="float: left; width: auto; margin-left: 10px;">
+                        <%= button_to "Won", setWon_bet_path(bet),:class => "btn btn-xs btn-primary", method: :put %> </div> 
+                        <div style="float: left; width: auto; margin-left: 3px;">
+                        <%= button_to "Lost", setLost_bet_path(bet),:class => "btn btn-xs btn-primary", method: :put %></div>
+                        <div style="float: left; width: auto; margin-left: 3px;">
+                        <span class="label label-default">    
+                        <%=bet.reminder.hour%>:<%=bet.reminder.min%>  
+                        <%=bet.reminder.day%>.<%=bet.reminder.month%>.<%=bet.reminder.year.to_s.slice(2,3)%>
+                        </span></div>
+                        </li>
+                        <br></br>
+                        <% unless bet == @bets.toRemind.remindable.last%><li class="divider"></li><%end%>
+                    <%end%>
+                    </ul>
+                </li>
+                <li class="dropdown">
                 <% if user_signed_in? %>
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%=current_user.email%> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
