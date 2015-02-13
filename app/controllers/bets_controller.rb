@@ -14,7 +14,9 @@ require 'pry'
   def stats
    @bets = Bet.where(user_id: current_user.id)
  end
- 
+ def settings
+  @bets = Bet.where(user_id: current_user)
+ end 
   # GET /bets/1
   # GET /bets/1.json
   def show

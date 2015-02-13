@@ -54,6 +54,30 @@
             <ul class="nav navbar-right top-nav">
               
                 <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"> <%= @bets.toRemind.remindable.size%></i> <b class="caret"></b></a>
+                    <ul class="dropdown-menu alert-dropdown">
+                    <% @bets.toRemind.remindable.each do |bet|%>
+
+                        <li><a href="#"><%=bet.match%> </a>
+                        <div style="float: left; width: auto; margin-left: 10px;">
+                        <%= button_to "Won", setWon_bet_path(bet),:class => "btn btn-xs btn-primary", method: :put %> </div> 
+                        <div style="float: left; width: auto; margin-left: 3px;">
+                        <%= button_to "Lost", setLost_bet_path(bet),:class => "btn btn-xs btn-primary", method: :put %></div>
+                        <div style="float: left; width: auto; margin-left: 3px;">
+                        <span class="label label-default">    
+                        <%=bet.reminder.hour%>:<%=bet.reminder.min%>  
+                        <%=bet.reminder.day%>.<%=bet.reminder.month%>.<%=bet.reminder.year.to_s.slice(2,3)%>
+                        </span></div>
+                        </li>
+                        <br></br>
+                        <% unless bet == @bets.toRemind.remindable.last%><li class="divider"></li><%end%>
+                    <%end%>
+                    </ul>
+                </li>
+
+
+
+                <li class="dropdown">
                 <% if user_signed_in? %>
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%=current_user.email%> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -72,12 +96,15 @@
                     </li>
                     <li>
                         <a href="/list"><i class="fa fa-fw fa-desktop"></i> Bets</a>    
-                    </li> 
+                    </li>
                     <li>
-                        <a href="/stats"><i class="fa fa-fw fa-bar-chart-o"></i> Stats</a>
+                        <a href="#"><i class="fa fa-fw fa-bar-chart-o"></i> Stats</a>
                     </li>
                     <li class="active">
-                        <a href="#"><i></i> About</a>
+                        <a href="/settings"><i class="fa fa-fw fa-wrench"></i> Settings</a>
+                    </li>
+                    <li>
+                        <a href="/about"><i></i> About</a>
                     </li>
                     <li>
                     </li>
@@ -93,34 +120,46 @@
         </nav>
 
         <div id="page-wrapper">
-
+<a name="top"></a>
             <div class="container-fluid">
 
                 <!-- Page Heading -->
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            About <small>project info</small>
-                        </h1> 
-                    </div>
-                </div>
-                <h2> Hello,</h2>
-                <div> My name is Michal Hornák. More info later.</div>
-                <div></div>
-                <!--<h2> Something about me </h2>
-                <div> As I already mentioned my name is Michal, but I often use my nickname: eXpres. I am coming from Slovakia(central Europe).</div>
-                <div> I studied Applied Informatics(with specialization on security) at Slovak University of Technology in Bratislava where I achieved bachelor degree. Simultaneously I worked in antivirus company ESET for year and a half, until I moved to Czech Republic. </div>
-                <div> At the moment I study Applied informatics on Masaryk University in Brno. </div> -->
-              <!--alert alert-info-->
+                            Settings 
+                        </h1>
+                    </div>  <!-- col-lg-12-->
+                    <h3>Frequency of mail reminders:</h3> TODO
+                    <br>&nbsp;</div>
+                    <h3>Change password</h3>      
+                    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+                      <%= devise_error_messages! %>
+                      <%= f.hidden_field :reset_password_token %>
 
-            </div>
-            <!-- /.container-fluid -->
+                      <div class="field">
+                        <%= f.label :password, "New password" %><br />
+                        <%= f.password_field :password, autofocus: true, autocomplete: "off" %>
+                      </div>
 
-        </div>
-        <!-- /#page-wrapper -->
+                      <div class="field">
+                        <%= f.label :password_confirmation, "Confirm new password" %><br />
+                        <%= f.password_field :password_confirmation, autocomplete: "off" %>
+                      </div>
 
-    </div>
-    <!-- /#wrapper -->
+                      <div class="actions">
+                        <%= f.submit "Change my password" %>
+                      </div>
+                    <% end %>
+
+<%= render "devise/shared/links" %>
+                    <a href="#"><i class="btn btn-sm btn-primary">Save</i></a>
+
+                </div>  <!-- row-->
+            </div>  <!--container-fluid-->
+        </div>    <!-- /#page-wrapper -->
+
+    </div>    <!-- /#wrapper -->
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>

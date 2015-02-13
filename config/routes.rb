@@ -16,8 +16,9 @@ end
 get 'list' => 'bets#list'
 get 'stats' => 'bets#stats'
 get 'about' => 'bets#about'
+get 'settings' => 'bets#settings'
   root :to => "home#index"
-  match '*a' => redirect('/'), via: :get
+  #match '*a' => redirect('/'), via: :get
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
